@@ -31,10 +31,10 @@ void torresHanoi(int n,  int init, int aux, int end, int &count){
     }
     count++;
     torresHanoi(n-1,init,aux,end,count);
-    cout<<"1.Move disc "<<n<<" from tower "<<init<<" to tower "<<aux<<endl;
+    cout<<"Move disc "<<n<<" from tower "<<init<<" to tower "<<aux<<endl;
     count++;
     torresHanoi(n-1,end,aux,init,count);
-    cout<<"2.Move disc "<<n<<" from tower "<<aux<<" to tower "<<end<<endl;
+    cout<<"Move disc "<<n<<" from tower "<<aux<<" to tower "<<end<<endl;
     torresHanoi(n-1,init,aux,end,count);
     
 }  
