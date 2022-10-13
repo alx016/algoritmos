@@ -1,5 +1,4 @@
 /*
-Manuel Alejandro Preciado Morán A01639643
 Programa util para resolver el problema de las torres de hanoi con 
 'n' discos. El programa le solicitará el número de discos con los que desea trabajar
 para después mostrarle los movimientos y el número de movimientos necesarios para pasar 
