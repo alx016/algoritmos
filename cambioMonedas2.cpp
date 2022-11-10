@@ -76,7 +76,7 @@ int main(){
             }
             if (cambioAux >= monedasCambio[i]*cantidades[i]){
                 cout<<cantidades[i]<<" moneda(s) de "<<monedasCambio[i]<<" pesos"<<endl;
-                cambio -= cambioAux;
+                cambio -= res;
                 cambioAux=cambio;
                 total+=cantidades[i];
             }
