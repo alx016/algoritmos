@@ -30,11 +30,20 @@ void printVector(vector<int> v, int size){
     cout<<endl;
 }
 
+int cambioTotal(int s, vector<int> monedas, vector<int>cantidades){
+    int t = 0;
+    for (int i=0;i<s;i++){
+        t += monedas[i]*cantidades[i];
+    }
+    return t;
+}
+
 int main(){
     vector<int> monedasCambio, cantidades; //las denominaciones de monedas con las que se puede dar cambio
     int cuentaTotal, cambio, cambioAux, res, size, ent;
     int entregado = 0;
-    int total = 0;
+    int totalDev = 0;//monedas devueltas
+    int totalCambio = 0;//monto total que se tiene para el cambio
     int i;
 
     cout<<"Ingrese el total de la cuenta: ";
@@ -64,26 +73,34 @@ int main(){
     printVector(cantidades, cantidades.size());
 
     cambioAux = cambio;
+    totalCambio = cambioTotal(size, monedasCambio, cantidades);
+
     for (int i=monedasCambio.size()-1;cambio!=0; i--){
         if (cantidades[i] > 0){
-            while (cambioAux%monedasCambio[i] != 0){
-                cambioAux--;
-            }
-            res = (monedasCambio[i]*cantidades[i]);
-            while (res > cambioAux){
-                cantidades[i]--;
+            if (totalCambio >= cambio){
+                while (cambioAux%monedasCambio[i] != 0){
+                    cambioAux--;
+                }
                 res = (monedasCambio[i]*cantidades[i]);
+                while (res > cambioAux){
+                    cantidades[i]--;
+                    res = (monedasCambio[i]*cantidades[i]);
+                }
+                if (cambioAux >= monedasCambio[i]*cantidades[i]){
+                    cout<<cantidades[i]<<" moneda(s) de "<<monedasCambio[i]<<" pesos"<<endl;
+                    cambio -= res;
+                    cambioAux=cambio;
+                    totalDev+=cantidades[i];
+                }
             }
-            if (cambioAux >= monedasCambio[i]*cantidades[i]){
-                cout<<cantidades[i]<<" moneda(s) de "<<monedasCambio[i]<<" pesos"<<endl;
-                cambio -= res;
-                cambioAux=cambio;
-                total+=cantidades[i];
+            else{
+                cout<<"No se cuenta con el cambio suficiente."<<endl;
+                exit(1);
             }
         }
     }
 
-    cout<<total<<" monedas."<<endl;
+    cout<<totalDev<<" monedas."<<endl;
 
     return 0;
 }
