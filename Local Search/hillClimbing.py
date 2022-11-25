@@ -1,3 +1,5 @@
+#Orden O(n)^2
+
 import random 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -12,24 +14,31 @@ if (aux == '1'):
     #higher number
     greatest = 0
     for i in range(4):
-        num = random.randrange(0,100,1)
-
-        while (y[num]<y[num+1]):
-            greatest = y[num+1]
+        num = random.randrange(0,99,1)
+        while (y[num-1]<y[num]):
+            greatest = num
+            if (num + 1 == 100):
+                num = 0
             num = num + 1
+        while (y[num-1]>y[num]):
+            greatest = num
+            num = num - 1
 elif (aux == '2'):
     #lowest number
     greatest = 0
     for i in range(4):
-        num = random.randrange(0,100,1)
-        print (num)
+        num = random.randrange(0,99,1)
+        # print (num)
         while (y[num]>y[num+1]):
-            greatest = y[num+1]
+            greatest = num
             num = num + 1
+        while (y[num-1]<y[num]):
+            greatest = num
+            num = num - 1
 else:
     print('Error, invalid input.')
 
 fig = plt.figure(figsize = (10, 5))
 plt.plot(x, y, 'b', label = 'eq')
-plt.axvline(x[num], ls='--', color='r')
+plt.axvline(x[greatest], ls='--', color='r')
 plt.show()
